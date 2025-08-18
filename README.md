@@ -4,5 +4,6 @@
 - 請使用 props 將商品資料傳遞至「商品列表」元件
 - 「購物車」元件的刪除功能，請使用 emit 傳遞事件
 - 使用 provide, inject 完成通知功能
+- [作業](https://inventor9871.github.io/hex_vue_mission01/)
 
 
