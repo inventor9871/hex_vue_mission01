@@ -1,7 +1,8 @@
 <template>
   <div class="col-md-4">
-      <h2 class="mb-3">購物車</h2>
-      <ul class="list-group mb-3">
+    <h2 class="mb-3">購物車</h2>
+      <div v-if="temp.length > 0">
+        <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="item in temp" :key="item.id">
 
           <div>
@@ -20,8 +21,12 @@
 
         </li>
       </ul>
-      <p v-if="temp.length > 0"  class="alert alert-primary">總金額：{{ tempTotal }}</p>
-    </div>
+      <p class="alert alert-primary">總金額：{{ tempTotal }}</p>
+      </div>
+      <div v-else>
+        <p class="alert alert-danger">尚無商品</p>
+      </div>
+  </div>
 </template>
 <script setup>
 import { defineProps, defineEmits } from 'vue';
