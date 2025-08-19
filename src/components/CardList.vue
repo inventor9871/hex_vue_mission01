@@ -20,7 +20,7 @@
 
         </li>
       </ul>
-      <a v-if="temp.length > 0"  class="btn btn-outline-primary">總金額：{{ tempTotal }}</a>
+      <p v-if="temp.length > 0"  class="alert alert-primary">總金額：{{ tempTotal }}</p>
     </div>
 </template>
 <script setup>
