@@ -9,7 +9,7 @@
             <small>訂單編號：{{ item.id }}</small>
             <h6 class="my-0">{{ item.name }}</h6>
             數量： {{ item.count  }}
-            <!-- <input class="text-muted" type="number" v-model="item.count" min="0" max="10"/> -->
+
 
           </div>
           <div>

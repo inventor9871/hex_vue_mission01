@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref,  } from 'vue';
+import { computed, onMounted, provide, ref,  } from 'vue';
 import ProductList from '@/components/ProductList.vue';
 import CardList from '@/components/CardList.vue';
 import ToastList from '@/components/ToastList.vue';
@@ -57,8 +57,7 @@ const addTo = (item)=>{
   }, 3000)
 
 }
-
-
+provide('toastList', toastList)
 
 const tempTotal = computed(()=>{
   return cart.value.reduce(((sum, item)=>{

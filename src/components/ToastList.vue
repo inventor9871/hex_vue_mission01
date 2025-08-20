@@ -12,10 +12,11 @@
   </div>
 </template>
 <script setup>
-import { defineProps, defineEmits } from 'vue';
-defineProps(['toastList'])
+import {  defineEmits, inject } from 'vue';
+
 const emit = defineEmits(['delToast'])
 const delToastEmit = (index)=>{
   emit('delToast', index)
 }
+const toastList = inject('toastList')
 </script>
