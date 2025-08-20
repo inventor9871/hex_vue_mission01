@@ -32,31 +32,24 @@ onMounted(()=>{
   ]
 })
 
-const temp = ref([]);
+const cart = ref([]);
 
 const toastList = ref([]);
 
 const addTo = (item)=>{
-  //  console.log('item : ',item)
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1; // getMonth() 回傳 0-11，所以要 +1
-  const day = now.getDate();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
-  const milliseconds = now.getMilliseconds();
-
-  const time = `${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`;
-
   const tempItem = {
-    id: time,
+    id: item.id,
     name: item.title,
     count: 1,
     price: item.price,
   }
-
-  temp.value.push(tempItem);
+  const index = cart.value.findIndex(x=>x.id ===item.id);
+  console.log(index, cart.value);
+  if (index == '-1'){
+    cart.value.push(tempItem);
+  }else{
+    cart.value[index].count++
+  }
 
   toastList.value.push(item.title)
   setTimeout(()=>{
@@ -68,16 +61,15 @@ const addTo = (item)=>{
 
 
 const tempTotal = computed(()=>{
-  return temp.value.reduce(((sum, item)=>{
+  return cart.value.reduce(((sum, item)=>{
   return sum+ (item.count * item.price)
 }),0)
 })
 
 const delItem = (item)=>{
-  const index = temp.value.findIndex(x=> x.id == item.id
+  const index = cart.value.findIndex(x=> x.id == item.id
   )
-  // console.log(index)
-  temp.value.splice(index,1)
+  cart.value.splice(index,1)
 }
 
 const delToast = (index)=>{
@@ -93,67 +85,17 @@ const delToast = (index)=>{
      <ProductList :products="products"
       @addTo="addTo"
      />
-     <!-- @click="addTo" -->
-    <!-- <div cl`ass="col-md-8">`
-      <h2 class="mb-3">商品列表</h2>
-      <div class="row">
-        <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
-          <div class="card h-100">
-            <img :src="item.imgUrl" class="card-img-top">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p class="card-text">{{ item.description }}</p>
-              <p class="fw-bold text-primary">$ {{ item.price }}</p>
-              <button class="btn btn-success w-100" @click="addTo(item)"> 加入購物車 </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+
 
     <!-- 購物車區 -->
-     <CardList :temp="temp" :temp-total="tempTotal"
+     <CardList :cart="cart" :temp-total="tempTotal"
      @del-item="delItem"
      />
-    <!-- <div class="col-md-4">
-      <h2 class="mb-3">購物車</h2>
-      <ul class="list-group mb-3">
-        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="item in temp" :key="item.id">
-
-          <div>
-            <small>訂單編號：{{ item.id }}</small>
-            <h6 class="my-0">{{ item.name }}</h6>
-            數量：
-            <input class="text-muted" type="number" v-model="item.count" min="0" max="10"/>
-
-          </div>
-          <div>
-            <span class="text-muted">${{ item.price * item.count }}</span>
-            <button class="btn btn-sm btn-outline-danger ms-2"
-            @click="delItem(item)"
-            > 移除 </button>
-          </div>
-
-        </li>
-      </ul>
-      <a v-if="temp.length > 0"  class="btn btn-outline-primary">總金額：{{ tempTotal }}</a>
-    </div> -->
   </div>
 
   <!-- 通知元件 -->
    <ToastList :toastList="toastList"
     @del-toast="delToast" />
-  <!-- <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050" v-if="toastList.length>0">
-    <div class="toast show align-items-center text-white bg-success border-0" v-for="(item, index) in toastList" :key="item.id"
-    style="margin: 2px;" >
-      <div class="d-flex">
-        <div class="toast-body">
-         您已訂購 {{ item }}</div>
-
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" @click="delToast(index)"></button>
-      </div>
-    </div>
-  </div> -->
 
 </div>
 </template>

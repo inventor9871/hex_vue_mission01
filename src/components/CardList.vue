@@ -1,15 +1,15 @@
 <template>
   <div class="col-md-4">
     <h2 class="mb-3">購物車</h2>
-      <div v-if="temp.length > 0">
+      <div v-if="cart.length > 0">
         <ul class="list-group mb-3">
-        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="item in temp" :key="item.id">
+        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="item in cart" :key="item.id">
 
           <div>
             <small>訂單編號：{{ item.id }}</small>
             <h6 class="my-0">{{ item.name }}</h6>
-            數量：
-            <input class="text-muted" type="number" v-model="item.count" min="0" max="10"/>
+            數量： {{ item.count  }}
+            <!-- <input class="text-muted" type="number" v-model="item.count" min="0" max="10"/> -->
 
           </div>
           <div>
@@ -30,7 +30,9 @@
 </template>
 <script setup>
 import { defineProps, defineEmits } from 'vue';
-defineProps(['temp', 'tempTotal'])
+
+defineProps(['cart', 'tempTotal'])
+
 const emit = defineEmits(['delItem' ])
 const delItemEmit = (item)=>{
   emit('delItem', item)

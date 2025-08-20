@@ -10,7 +10,7 @@
               <p class="card-text">{{ item.description }}</p>
               <p class="fw-bold text-primary">$ {{ item.price }}</p>
               <button class="btn btn-success w-100" @click="addToEmit(item)"> 加入購物車 </button>
-              <!-- @click="addToEmit(item)" -->
+
             </div>
           </div>
         </div>
